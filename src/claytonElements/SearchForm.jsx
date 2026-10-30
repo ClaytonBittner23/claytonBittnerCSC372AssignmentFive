@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-//Using the function passed from App.jsx
+//The search form itself and its bit of logic.
 function SearchForm({ onSearch }) {
   //Makes the state query that can be changed with setQuery auto to empty  
   const [query, setQuery] = useState('')

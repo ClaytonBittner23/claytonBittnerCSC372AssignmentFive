@@ -1,8 +1,9 @@
-
+//Importing useState, useEffet, link, and the two utils functions
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { cleanSummary, getDisplayValue } from '../utils/utils'
 
+//The main function, needs a show value which is gained from Gallery.jsx
 function ShowCard({ show }) {
   //Creates a empty array called cast that can be updated with setCast
   const [cast, setCast] = useState([])
@@ -12,6 +13,7 @@ function ShowCard({ show }) {
     //runs this to get the cast from the api url, using the show id from the main api call
     async function getCast() {
       try {
+        //uses the show object's id from Gallery.jsx to make a call for the cast
         const response = await fetch(
           `https://api.tvmaze.com/shows/${show.id}/cast`
         )
@@ -37,7 +39,7 @@ function ShowCard({ show }) {
     //This is creating the actual bundle of info that is the card, first by putting them under a class of show-card
     <article className="show-card">
         {/*this is a pretty dumb way to do comments but whatever
-        First it grabs the show name*/}
+        First it grabs the show name, and makes a link to its detail page*/}
       <h2>
             <Link to={`/shows/${show.id}`}>
                 {show.name}
@@ -48,8 +50,8 @@ function ShowCard({ show }) {
       {show.image && (
         <img src={show.image.medium} alt={show.name} />
       )}
-        {/*These next four are pretty much the same, they go and grab them from the json and if they are \
-        not there it just says it could not be found. Summary replaces the html jank with empty characters*/}
+      
+        {/*These next four are pretty much the same, they go and grab them from the json if it can*/}
       
       <p>
         Genres: {show.genres.length > 0

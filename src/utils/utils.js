@@ -1,4 +1,3 @@
-
 //Removes HTML tags from a string
 export function cleanSummary(summary) {
   if (!summary) {

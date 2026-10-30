@@ -1,9 +1,11 @@
-
+//imports stuff needed, and the two functions from my utils file for handling missing info and html text
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { cleanSummary, getDisplayValue } from '../utils/utils'
 
+//The main function, where all the magic happens
 function ShowDetail() {
+
   //Gets the show ID from the URL
   const { id } = useParams()
 
@@ -29,6 +31,7 @@ function ShowDetail() {
           throw new Error('Could not fetch show details')
         }
 
+        //sets the show variable to the showData
         const showData = await showResponse.json()
         setShow(showData)
 
@@ -71,6 +74,11 @@ function ShowDetail() {
     return <p>Show not found.</p>
   }
 
+  //Comment keeps crashing the return for some reason so Ill keep this brief. 
+  //At the top there is a return link to the main page
+  // Pulls the relevent info out of show variable and cast variable.
+  //Calls the functions in utils.js for handling missing info and html text.
+  //Creates a map for cast members, linking that member with them and who they played on the show
   return (
     <div className="show-details">
       <Link to="/">Back to Gallery</Link>
@@ -93,21 +101,10 @@ function ShowDetail() {
 
       <p>Status: {getDisplayValue(show.status)}</p>
 
-      <p>
-        Network / Streaming Service: {
-          show.network?.name || show.webChannel?.name || 'Not available'
-        }
-      </p>
-
       <h2>Summary</h2>
-      <p>
-        {show.summary
-          ? show.summary.replace(/<[^>]*>/g, '')
-          : 'No summary available.'}
-      </p>
+      <p>{cleanSummary(show.summary)}</p>
 
       <h2>Cast</h2>
-
       {cast.length > 0 ? (
         <ul>
           {cast.map((member) => (

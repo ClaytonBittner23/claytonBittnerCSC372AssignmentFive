@@ -1,12 +1,13 @@
-
+//Importing useState and useEffect from react, then the SearchForm and ShowCard functions from their files
 import { useState, useEffect } from 'react'
 import SearchForm from './SearchForm'
 import ShowCard from './ShowCards'
 
-//This is the gallery page, containing our search functionality
+//This is the gallery page, containing the searching
 function Gallery() {
 
   //Creating variables for the search, the empty array of shows, loading state, and an error state.
+  //Starter value of Fullmetal Alchemist is hardcoded into the page.
   const [searchTerm, setSearchTerm] = useState('Fullmetal Alchemist')
   const [shows, setShows] = useState([])
   const [loading, setLoading] = useState(false)
@@ -28,6 +29,7 @@ function Gallery() {
 
     //function for getting the show data
     async function getShows() {
+
       //auto sets loading to true and error to empty
       setLoading(true)
       setError('')
@@ -64,23 +66,29 @@ function Gallery() {
 
   return (
     <>
+      {/*Its a header what do you want me to say*/}
       <h1>TVmaze Show Gallery</h1>
 
+      {/*Calls SeachForm, and when it gets a input, chuck it into the handleSearch function*/}
       <SearchForm onSearch={handleSearch} />
 
+      {/*Flavor text for loading, errors, the works*/}
       {loading && <p>Loading shows...</p>}
-
       {error && <p>{error}</p>}
-
       {!loading && !error && searchTerm !== '' && shows.length === 0 && (
         <p>No shows found.</p>
       )}
 
+      {/*The div that displays the cards made by the ShowCard function*/}
       <div className="show-list">
         {shows.map((show) => (
           <ShowCard key={show.id} show={show} />
         ))}
       </div>
+
+      {/*The footer giving credit to TVmaze and a link to them so I dont get sued*/}
+      <p><a href="https://www.tvmaze.com/">Link to TVmaze, all data provided by them</a></p>
+
     </>
   )
 }
