@@ -62,3 +62,69 @@ h1 {
 .show-card li {
   margin-bottom: 6px;
 }
+
+/*Detail Page Styles*/
+
+
+/*Styles for the individual show details page*/
+
+.show-details {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.show-details h1 {
+  color: blue;
+  margin-bottom: 20px;
+}
+
+.show-details img {
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 25px;
+  border-radius: 8px;
+}
+
+.show-details h2 {
+  color: #3b5998;
+  margin-top: 25px;
+}
+
+.show-details p {
+  line-height: 1.6;
+}
+
+.show-details ul {
+  padding-left: 25px;
+}
+
+.show-details li {
+  margin-bottom: 8px;
+}
+
+.show-details a {
+  color: #3b5998;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.show-details a:hover {
+  text-decoration: underline;
+}
+
+/*Adjusts the detail page for smaller screens*/
+@media (max-width: 600px) {
+  .show-details {
+    padding: 18px;
+  }
+
+  .show-details img {
+    max-width: 220px;
+  }
+}

@@ -1,5 +1,7 @@
 
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { cleanSummary, getDisplayValue } from '../utils/utils'
 
 function ShowCard({ show }) {
   //Creates a empty array called cast that can be updated with setCast
@@ -36,7 +38,11 @@ function ShowCard({ show }) {
     <article className="show-card">
         {/*this is a pretty dumb way to do comments but whatever
         First it grabs the show name*/}
-      <h2>{show.name}</h2>
+      <h2>
+            <Link to={`/shows/${show.id}`}>
+                {show.name}
+            </Link>
+      </h2>
 
         {/*Grabs the image for the show if its there*/}
       {show.image && (
@@ -44,23 +50,19 @@ function ShowCard({ show }) {
       )}
         {/*These next four are pretty much the same, they go and grab them from the json and if they are \
         not there it just says it could not be found. Summary replaces the html jank with empty characters*/}
-      <p>Rating: {show.rating.average || 'Not available'}</p>
-
+      
       <p>
         Genres: {show.genres.length > 0
           ? show.genres.join(', ')
           : 'Not available'}
       </p>
 
-      <p>Premiered: {show.premiered || 'Not available'}</p>
+      <p>Rating: {getDisplayValue(show.rating.average)}</p>
+      <p>Premiered: {getDisplayValue(show.premiered)}</p>
 
       <div>
         <h3>Summary</h3>
-        <p>
-          {show.summary
-            ? show.summary.replace(/<[^>]*>/g, '')
-            : 'No summary available.'}
-        </p>
+        <p>{cleanSummary(show.summary)}</p>
       </div>
 
       <div>
